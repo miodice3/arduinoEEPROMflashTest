@@ -1,4 +1,6 @@
 /*
+ * compatible board: DIOT ESP32 DEVKIT V1
+ * 
  * The purpose of this test is:
  * 
  * -on power up:
@@ -10,14 +12,31 @@
  * it should not create a new ID and require new rails configuration, but find its own identifier and continue communicating as a
  * recognized device to the rails server. 
  * 
+ * Chip ID: 3775164
+ * Chip ID: 3716192
+ * Chip ID: 3708504
+ * 
  */
+
+uint32_t chipId = 0;
 
 void setup() {
   // put your setup code here, to run once:
+    Serial.begin(115200);
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  for(int i=0; i<17; i=i+8) {
+    chipId |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
+  }
+
+  Serial.printf("ESP32 Chip model = %s Rev %d\n", ESP.getChipModel(), ESP.getChipRevision());
+  Serial.printf("This chip has %d cores\n", ESP.getChipCores());
+  Serial.print("Chip ID: "); Serial.println(chipId);
+  
+  delay(3000);
+
 
 }
