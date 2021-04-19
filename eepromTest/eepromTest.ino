@@ -12,13 +12,16 @@
 */
 
 #include "LED_Controls.h"
+#include "MAC_Address.h"
 
 //uint32_t chipId = 0;
 
 void setup() {
-//  Serial.begin(115200);
+  Serial.begin(115200);
+  
   LED.Begin(LED_BUILTIN);
-  LED.IDENTIFY(LED_BUILTIN);
+//  DEVICE.ID();
+
 }
 
 void loop() {
@@ -27,14 +30,7 @@ void loop() {
   delay(1000);
   LED.OFF(LED_BUILTIN);
   delay(1000);
+//  Serial.print("chips id is: "); Serial.println(DEVICE.ID);
+  DEVICE.ID;
 
 }
-
-//  for (int i = 0; i < 17; i = i + 8) {
-//    chipId |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
-//  }
-
-//  Serial.printf("ESP32 Chip model = %s Rev %d\n", ESP.getChipModel(), ESP.getChipRevision());
-//  Serial.printf("This chip has %d cores\n", ESP.getChipCores());
-//  Serial.print("Chip ID: "); Serial.println(chipId);
-//  Serial.print("chips id is: "); Serial.println(ESP.ID);
