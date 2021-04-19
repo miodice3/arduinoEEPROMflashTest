@@ -1,18 +1,11 @@
 /*
    compatible board: DIOT ESP32 DEVKIT V1
 
-   The purpose of this test is:
+   Revised:
+   using mac address example, obtain mac address & derive unique chip id from this.
+   avoids writing to flash memory, start up procedure to check and get ID with far less code.
 
-   -on power up:
-   -check if random integer ID is stored in EEPROM/flash, if found, continue with boot having saved stored value to 'device-id'
-   -if no stored integer ID is found, generate a random integer ID, save to EEPROM/flash, assign to 'device-id' and continue
-
-   The function of this is to flash any ESP32 and have it generate its own unique ID, which will then be used to communicate
-   to the backend rails server.  Rails server will 'find_or_create' based off this unique device-id, so when the ESP32 power cycles
-   it should not create a new ID and require new rails configuration, but find its own identifier and continue communicating as a
-   recognized device to the rails server.
-
-   Chip ID: 3775164
+   Chip ID: 3775164     enter name:            toggle light on: (this turns on LED_builtin)
    Chip ID: 3716192
    Chip ID: 3708504
 
@@ -25,6 +18,7 @@
 void setup() {
 //  Serial.begin(115200);
   LED.Begin(LED_BUILTIN);
+  LED.IDENTIFY(LED_BUILTIN);
 }
 
 void loop() {

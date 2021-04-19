@@ -15,6 +15,15 @@ class LED_Controls {
     digitalWrite(GPIO_pin, LOW);
   }
 
+  void IDENTIFY(byte GPIO_pin){
+    for (int i = 0; i < 15; i++){
+    digitalWrite(GPIO_pin, HIGH);
+    delay(50);
+    digitalWrite(GPIO_pin, LOW);
+    delay(50);
+    }
+  }
+
 };
 
 LED_Controls    LED;
