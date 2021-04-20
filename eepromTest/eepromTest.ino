@@ -30,7 +30,7 @@ void loop() {
   delay(1000);
   LED.OFF(LED_BUILTIN);
   delay(1000);
-//  Serial.print("chips id is: "); Serial.println(DEVICE.ID);
-  DEVICE.ID;
+  Serial.print("chips id is: "); Serial.println(DEVICE.ID());
+//  DEVICE.ID();
 
 }
