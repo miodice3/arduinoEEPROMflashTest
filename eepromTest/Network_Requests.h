@@ -1,15 +1,22 @@
 #include "Arduino.h"
-//#include <Bridge.h>
+#include "config.h"
+
+#include <WiFi.h>
+//#include <HTTPClient.h>
+
 #include <HttpClient.h>
+
+
+
 #include "MAC_Address.h"
 
 class Network_Request{
   public:
 
   void Begin(){
-//    Bridge.begin();
-//    Serial.begin(115200);
-//    while(!Serial);
+    const char* ssid = "test";
+    const char* password = "PW";
+//    String railsRoute = "http://192.168.0.33:8000/appliances";
     }
 
   void LATCH(){

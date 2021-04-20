@@ -19,7 +19,6 @@ void setup() {
   Serial.begin(115200);
   NETWORK.Begin();
   LED.Begin(LED_BUILTIN);
-//  DEVICE.ID();
 
 }
 
