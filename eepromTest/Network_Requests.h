@@ -28,45 +28,23 @@ class Network_Request{
     Serial.println("");
     Serial.print("Connected to WiFi network with IP Address: ");
     Serial.println(WiFi.localIP());
-   
     Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
     }
 
   void LATCH(){
-    Serial.print("chips id is:: "); Serial.println(DEVICE.ID());
     HTTPClient  client;
-//  ifconfig |grep inet  
-    String url = "http://192.168.0.29:8000/appliances/";
-
-//    String payload = "{1,value1},{2,value2},{3,value3}";
-    String payload = "appliance=thisvalue&3=thisothervalue";
-    String httpRequestData = "value1=24.25&value2=49.54&value3=1005.14";
     
+//  ifconfig |grep inet  to get rails server IP, run on servers command line
+
+    String url = "http://192.168.0.29:8000/appliances/";
+    String device_ip = String(WiFi.localIP()[0]) + "." + String(WiFi.localIP()[1]) + "." + String(WiFi.localIP()[2]) + "." + String(WiFi.localIP()[3]);
+    String payload = "appliance=thisvalue&3=thisothervalue&device_id="+String(DEVICE.ID())+"&device_ip="+device_ip;
+
     client.begin(url);
     
-//    many tutorials are assembling dynamic URLS, passing in as so:
-//    http.begin(serverPath.c_str());
-
-//    client.GET();
-//    client.addHeader("Content-Type", "application/json");
     client.POST(payload);
-//      client.POST("{\"api_key\":\"tPmAT5Ab3j7F9\",\"sensor\":\"BME280\",\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
     }
 
 };
 
 Network_Request   NETWORK;
-
-//
-//HTTP POST JSON Object
-//Or if you prefer to make an HTTP POST request with a JSON object:
-//
-//POST /update-sensor HTTP/1.1
-//Host: example.com
-//{api_key: "tPmAT5Ab3j7F9", sensor_name: "BME280", temperature: 24.25; humidity: 49.54; pressure: 1005.14}
-//Content-Type: application/json
-//Use the next snippet:
-//
-//http.addHeader("Content-Type", "application/json");
-//
-//int httpResponseCode = http.POST("{\"api_key\":\"tPmAT5Ab3j7F9\",\"sensor\":\"BME280\",\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
